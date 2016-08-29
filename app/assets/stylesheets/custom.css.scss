@@ -66,11 +66,11 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: white;
-  text-transform: uppercase;
+  color: lightblue;
+  text-transform: downcase;
   letter-spacing: -1px;
   padding-top: 9px;
-  font-weight: bold;
+  font-weight: light;
   &:hover {
     color: white;
     text-decoration: none;
@@ -132,7 +132,7 @@ aside {
       line-height: 1;
     }
     h1 {
-      font-size: 1.4em;
+      font-size: 1.8em;
       text-align: left;
       letter-spacing: -1px;
       margin-bottom: 3px;
@@ -143,14 +143,14 @@ aside {
 
 .gravatar {
   float: left;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .gravatar_edit {
   margin-top: 15px;
 }
 
-.stats {
+.status_following {
   overflow: auto;
   margin-top: 0;
   padding: 0;
@@ -165,7 +165,7 @@ aside {
     }
     &:hover {
       text-decoration: none;
-      color: blue;
+      color: darkblue;
     }
   }
   strong {

@@ -11,13 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827121513) do
+ActiveRecord::Schema.define(version: 20160829162922) do
+
+  create_table "microposts", force: :cascade do |t|
+    t.text     "content",    limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.integer  "page_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "attachment", limit: 255
+  end
+
+  add_index "microposts", ["page_id"], name: "index_microposts_on_page_id", using: :btree
+  add_index "microposts", ["user_id"], name: "index_microposts_on_user_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id", limit: 4
+    t.integer  "followed_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -30,4 +49,6 @@ ActiveRecord::Schema.define(version: 20160827121513) do
     t.boolean  "admin"
   end
 
+  add_foreign_key "microposts", "pages"
+  add_foreign_key "microposts", "users"
 end

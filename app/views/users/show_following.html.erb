@@ -1,0 +1,27 @@
+<% provide(:title, @title) %>
+<div class="row">
+<aside class="col-md-4">
+<section class="user_info">
+<h1>
+<%= gravatar_for @user %>
+<%= @user.name %>
+</h1>
+</section>
+<section class="status_following">
+<%= render 'shared/status_following' %>
+</section>
+</aside>
+<div class="col-md-8">
+<h3><%= @title %></h3>
+
+<% if @pages.any? %>
+<ul class="pages">
+<% @pages.each do |page| %>
+<li>
+<%= page.name%>
+<%= link_to 'see', page %>
+<% end %>
+</ul>
+<% end %>
+</div>
+</div>

@@ -1,2 +1,23 @@
-<h1>StaticPages#help</h1>
-<p>Find me in app/views/static_pages/help.html.erb</p>
+<div class="center jumbotron">
+<h3>Help page!</h3>
+<h2>
+This is the help page for the Funda application.
+</h2>
+
+</div>
+<% if logged_in? %>
+<div class="row">
+<div class="col-md-8">
+<h3>Micropost help</h3>
+<p>You were redirected because of some fault in posting.
+If you tried to submit post without content or upload files with extension other then 
+<h2>pdf doc htm html docx jpg jpeg gif png </h2>you should try again.
+For other informations see contacts.
+</p>
+</div>
+</div>
+<% else %>
+<p> Here you can find useful information after you sign up to Funda.</p>
+
+
+<% end %>

@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 	before_action :admin_user, only: [:edit, :destroy, :new, :create]
-	before_action :logged_in_user, only: [:show, :index]
+	before_action :logged_in_user, only: [:show, :index, :followers]
   def index
   	@pages = Page.paginate(page: params[:page])
   end
@@ -21,6 +21,9 @@ class PagesController < ApplicationController
 
   def show
   	@page = Page.find(params[:id])
+  	current_page @page
+  	@microposts = @page.microposts.paginate(page: params[:page])
+  	@micropost = current_user.microposts.build if logged_in?
   end
 
   def edit
@@ -41,6 +44,13 @@ class PagesController < ApplicationController
 	Page.find(params[:id]).destroy
 	flash[:success] = "Page deleted"
 	redirect_to pages_url
+  end
+
+  def followers
+	@title = "Followers"
+	@page = Page.find(params[:id])
+	@users = @page.followers.paginate(page: params[:page])
+	render 'show_followers'
   end
 
   private

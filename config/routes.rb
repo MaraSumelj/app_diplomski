@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 root              'static_pages#home'
 get 'help' =>     'static_pages#help'
 get 'about' =>    'static_pages#about'
-get 'contact' =>  'static_pages#contact'
 get 'signup' =>   'users#new'
 
 get'login'  =>    'sessions#new'
@@ -12,8 +11,18 @@ delete 'logout' =>'sessions#destroy'
 get 'users' =>    'users#index'
 get 'create_page' => 'pages#new'
 get 'pages' =>    'pages#index'
-resources :users
-resources :pages
+resources :users do
+  member do
+    get :following
+  end
+end
+resources :pages do
+  member do
+    get :followers
+  end
+end
+resources :microposts, only: [:create, :destroy]
+resources :relationships, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

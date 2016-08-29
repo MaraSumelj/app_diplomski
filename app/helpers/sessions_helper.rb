@@ -4,6 +4,9 @@ module SessionsHelper
 		session[:user_id] = user.id
 	end
 
+	def current_page(page)
+		session[:page_id]= page.id
+	end
 	# Remembers a user in a persistent session.
 	def remember(user)
 		user.remember
@@ -31,6 +34,11 @@ module SessionsHelper
 		end
 	end
 
+	# Returns the page corresponding to the current position.
+	def current_page_id
+		return session[:page_id]
+	end
+
 	# Returns true if the given user is the current user.
 	def current_user?(user)
 		user == current_user
@@ -41,7 +49,14 @@ module SessionsHelper
 	end
 
 	def admin?
-		current_user.admin == true
+		if (current_user == nil)
+			return false
+		end
+		if (current_user.admin == true) 
+			return true
+		else
+			return false
+		end
 	end
 
 	# Logs out the current user.
@@ -66,6 +81,6 @@ module SessionsHelper
 
 	# Confirms an admin user.
 	def admin_user
-		redirect_to(root_url) unless current_user.admin?
+		redirect_to(root_url) unless admin?
 	end
 end
